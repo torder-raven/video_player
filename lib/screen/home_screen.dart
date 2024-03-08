@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player_kite/constant/colors.dart';
 import 'package:video_player_kite/constant/styles.dart';
 import 'package:video_player_kite/component/custom_video_player.dart';
 
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // 동영상 선택 전 보여줄 위젯
     return Container(
       width: MediaQuery.of(context).size.width, // 최대 너비로 늘려주기
+      decoration: getBoxDecoration(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬
         children: [
@@ -37,6 +39,19 @@ class _HomeScreenState extends State<HomeScreen> {
           ), // 로고 탭하면 실행하는 함수
           SizedBox(height: 30.0),
           _AppName(), // 앱 이름
+        ],
+      ),
+    );
+  }
+
+  BoxDecoration getBoxDecoration() {
+    return BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          AppColors.color_003973,
+          AppColors.color_e5e5be
         ],
       ),
     );
