@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget renderVideo() {
-    // 동영상 선택 후 보여줄 위젯
     return Center(
       child: CustomVideoPlayer(
         video: video!,
@@ -74,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// 로고를 보여줄 위젯
 class _Logo extends StatelessWidget {
   final GestureTapCallback onTap;
 
@@ -90,7 +88,7 @@ class _Logo extends StatelessWidget {
     String fileExtension = Strings.FILE_EXTENSION_PNG;
 
     return GestureDetector(
-      onTap: onTap, // 상위 위젯으로부터 앱 콜백 받기
+      onTap: onTap,
       child: Image.asset(
         "$imagePath$logo.$fileExtension",
       ),

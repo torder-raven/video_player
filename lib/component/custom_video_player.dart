@@ -9,30 +9,29 @@ import 'package:video_player_kite/constant/colors.dart';
 import '../constant/strings.dart';
 import '../constant/values.dart';
 
-// 동영상 위젯 생성
+
 class CustomVideoPlayer extends StatefulWidget {
-  final XFile video; // 선택한 동영상을 저장할 변수
-  final GestureTapCallback onNewVideoPressed; // 새로운 동영상을 선택하면 실행되는 함수
+  final XFile video;
+  final GestureTapCallback onNewVideoPressed;
 
   const CustomVideoPlayer({
     required this.video,
     required this.onNewVideoPressed,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<CustomVideoPlayer> createState() => _CustomVideoPlayerState();
 }
 
 class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
-  bool showControls = false; // 동영상 조작하는 아이콘을 보일지 여부
-
-  VideoPlayerController? videoPlayerController; // 동영상을 조작하는 컨트롤러
+  bool showControls = false;
+  VideoPlayerController? videoPlayerController;
 
   @override
   void initState() {
     super.initState();
-    initializeController(); // 컨트롤러 초기화
+    initializeController();
   }
 
   @override
@@ -165,9 +164,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   void onReversePressed() {
     const targetDuration = Duration(seconds: Values.MOVING_SECONDS_UNIT);
     final currentPosition =
-        videoPlayerController!.value.position; // 현재 실행 중인 위치
+        videoPlayerController!.value.position;
 
-    Duration position = const Duration(); // 0초로 살행 위치 초기화
+    Duration position = const Duration();
 
     if (currentPosition.inSeconds > 3) {
       position = currentPosition - targetDuration;
@@ -178,7 +177,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   void onForwardPressed() {
     const targetDuration = Duration(seconds: Values.MOVING_SECONDS_UNIT);
-    final maxPosition = videoPlayerController!.value.duration; // 동영상 길이
+    final maxPosition = videoPlayerController!.value.duration;
     final currentPosition = videoPlayerController!.value.position;
 
     Duration position = maxPosition;

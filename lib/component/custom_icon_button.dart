@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:video_player_kite/constant/colors.dart';
 
 class CustomIconButton extends StatelessWidget {
-  final GestureTapCallback onPressed; // 아이콘을 눌렀을 때 실행할 함수
-  final IconData iconData; // 아이콘
+  final GestureTapCallback onPressed;
+  final IconData iconData;
 
   const CustomIconButton({
     required this.onPressed,
     required this.iconData,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
