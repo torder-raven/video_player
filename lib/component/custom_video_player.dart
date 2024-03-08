@@ -62,6 +62,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     setState(() {});
   }
 
+  /** 이것도 위젯이 길어보이는데 더 분리할수가 있을지? */
   @override
   Widget build(BuildContext context) {
     if (videoPlayerController == null) {
