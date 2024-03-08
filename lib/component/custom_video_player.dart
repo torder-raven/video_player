@@ -108,19 +108,31 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                 bottom: 0,
                 right: 0,
                 left: 0,
-                child: Slider(
-                  // 슬라이더가 이동할 때마다 실행할 함수
-                  onChanged: (double val) {
-                    videoPlayerController!.seekTo(
-                      Duration(seconds: val.toInt()),
-                    );
-                  },
-                  // 동영상 재생 위치를 초 단위로 구현
-                  value: videoPlayerController!.value.position.inSeconds
-                      .toDouble(),
-                  min: 0,
-                  max: videoPlayerController!.value.duration.inSeconds
-                      .toDouble(),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    children: [
+                      renderTimeTextFromDuration(
+                        videoPlayerController!.value.position,
+                      ),
+                      Expanded(
+                        child: Slider(
+                          // 슬라이더가 이동할 때마다 실행할 함수
+                          onChanged: (double val) {
+                            videoPlayerController!.seekTo(
+                              Duration(seconds: val.toInt()),
+                            );
+                          },
+                          // 동영상 재생 위치를 초 단위로 구현
+                          value: videoPlayerController!.value.position.inSeconds
+                              .toDouble(),
+                          min: 0,
+                          max: videoPlayerController!.value.duration.inSeconds
+                              .toDouble(),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               if (showControls)
@@ -197,5 +209,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     } else {
       videoPlayerController!.play();
     }
+  }
+
+  Widget renderTimeTextFromDuration(Duration duration) {
+    return Text(
+      "${duration.inMinutes.toString().padLeft(2, '0')}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}",
+      style: TextStyle(color: AppColors.color_ffffff),
+    );
   }
 }
