@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player_kite/constant/styles.dart';
+import 'package:video_player_kite/component/custom_video_player.dart';
 
 import '../constant/strings.dart';
 
@@ -56,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget renderVideo() {
     // 동영상 선택 후 보여줄 위젯
-    return Container();
+    return Center(
+      child: CustomVideoPlayer(video: video!),
+    );
   }
 }
 
