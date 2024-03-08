@@ -12,8 +12,12 @@ class CustomVideoPlayer extends StatefulWidget {
   // XFile은 ImagePicker로 영상 또는 이미지를 선택했을 때 반환하는 타입
   final XFile video;
 
+  // 새로운 동영상을 선택하면 실행되는 함수
+  final GestureTapCallback onNewVideoPressed;
+
   const CustomVideoPlayer({
     required this.video,
+    required this.onNewVideoPressed,
     Key? key,
   }) : super(key: key);
 
@@ -24,6 +28,15 @@ class CustomVideoPlayer extends StatefulWidget {
 class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   // 동영상을 조작하는 컨트롤러
   VideoPlayerController? videoPlayerController;
+
+  @override
+  void didUpdateWidget(covariant CustomVideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.video.path != widget.video.path) {
+      initializeController();
+    }
+  }
 
   @override
   void initState() {
@@ -51,9 +64,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   // 동영상의 재생 상태가 변경될 때마다
   // setState()를 실행해서 build()를 재실행합니다.
   void videoControllerListener() {
-    setState(() {
-
-    });
+    setState(() {});
   }
 
   // State가 폐기될 때 같이 폐기할 함수들을 실행합니다.
@@ -101,7 +112,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
             Align(
               alignment: Alignment.topRight,
               child: CustomIconButton(
-                onPressed: () {},
+                onPressed: widget.onNewVideoPressed,
                 iconData: Icons.photo_camera_back,
               ),
             ),
