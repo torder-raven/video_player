@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player_kite/constant/styles.dart';
 
-import '../constant/colors.dart';
 import '../constant/strings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,12 +31,27 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center, // 가운데 정렬
         children: [
-          // _Logo(), // 로고 이미지
+          _Logo(
+            onTap: onNewVideoPressed,
+          ), // 로고 탭하면 실행하는 함수
           SizedBox(height: 30.0),
           _AppName(), // 앱 이름
         ],
       ),
     );
+  }
+
+  // 이미지 선택하는 기능을 구현한 함수
+  void onNewVideoPressed() async {
+    final video = await ImagePicker().pickVideo(
+      source: ImageSource.gallery,
+    );
+
+    if (video != null) {
+      setState(() {
+        this.video = video;
+      });
+    }
   }
 
   Widget renderVideo() {
@@ -75,10 +89,10 @@ class _AppName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center, // 글자 가운데 정렬
       children: [
-        const Text(
+        Text(
           Strings.VIDEO,
           style: AppTextStyles.esamanru_30_w300,
         ),
