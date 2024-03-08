@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player_kite/constant/styles.dart';
+import 'package:video_player_kite/component/custom_icon_button.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:io';
 
@@ -76,6 +77,35 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                     videoPlayerController!.value.position.inSeconds.toDouble(),
                 min: 0,
                 max: videoPlayerController!.value.duration.inSeconds.toDouble(),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: CustomIconButton(
+                onPressed: () {},
+                iconData: Icons.photo_camera_back,
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CustomIconButton(
+                    onPressed: () {},
+                    iconData: Icons.rotate_left,
+                  ),
+                  CustomIconButton(
+                    onPressed: () {},
+                    iconData: videoPlayerController!.value.isPlaying
+                        ? Icons.pause
+                        : Icons.play_arrow,
+                  ),
+                  CustomIconButton(
+                    onPressed: () {},
+                    iconData: Icons.rotate_right,
+                  ),
+                ],
               ),
             )
           ],
