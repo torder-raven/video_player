@@ -18,6 +18,8 @@ class BaseVideoPlayer extends StatefulWidget {
 
 class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
   late VideoPlayerController videoPlayerController;
+  late VoidCallback videoControllerListener = onChangedVideoController;
+
   Duration currentPosition = const Duration();
   Duration eventPosition = const Duration();
   bool showControls = false;
@@ -33,6 +35,7 @@ class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.videoXFile.path != widget.videoXFile.path) {
+      onDisposeVideoPlayer();
       initVideoController();
     }
   }
@@ -77,29 +80,36 @@ class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
 
   @override
   void dispose() {
-    videoPlayerController.dispose();
+    onDisposeVideoPlayer();
     super.dispose();
   }
 
   void initVideoController() async {
     videoPlayerController =
         VideoPlayerController.file(File(widget.videoXFile.path))
-          ..addListener(() {
-            setState(() {
-              currentPosition = videoPlayerController.value.position;
-
-              if (showControls &&
-                  currentPosition - eventPosition >
-                      const Duration(
-                          seconds: BaseVideoPlayerConstants.HIDE_SECONDS)) {
-                showControls = false;
-              }
-            });
-          });
+          ..addListener(videoControllerListener);
 
     await videoPlayerController.initialize();
 
     onPlayOrPause();
+  }
+
+  void onChangedVideoController() {
+    setState(() {
+      currentPosition = videoPlayerController.value.position;
+
+      if (showControls &&
+          currentPosition - eventPosition >
+              const Duration(
+                  seconds: BaseVideoPlayerConstants.HIDE_SECONDS)) {
+        showControls = false;
+      }
+    });
+  }
+
+  void onDisposeVideoPlayer() {
+    videoPlayerController.removeListener(videoControllerListener);
+    videoPlayerController.dispose();
   }
 
   void onPlayOrPause() {
