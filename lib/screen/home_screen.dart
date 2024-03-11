@@ -60,14 +60,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget getVideoWidget(XFile videoXFile) => Container(
-    color: Colors.black,
-    child: Center(
-      child: BaseVideoPlayer(
-        videoXFile: videoXFile,
-        onNewVideoPressed: _pickVideo,
-      ),
-    ),
-  );
+        color: Colors.black,
+        child: Center(
+          child: BaseVideoPlayer(
+            videoXFile: videoXFile,
+            onNewVideoPressed: _pickVideo,
+          ),
+        ),
+      );
 }
 
 class _Logo extends StatelessWidget {
