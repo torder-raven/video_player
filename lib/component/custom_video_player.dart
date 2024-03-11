@@ -59,7 +59,6 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     setState(() {});
   }
 
-  /** 이것도 위젯이 길어보이는데 더 분리할수가 있을지? */
   @override
   Widget build(BuildContext context) {
     if (videoPlayerController == null) {
@@ -87,21 +86,9 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
                 ),
               Positioned(
                 bottom: 0,
-                right: 0,
                 left: 0,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Row(
-                    children: [
-                      renderTimeTextFromDuration(
-                        videoPlayerController!.value.position,
-                      ),
-                      Expanded(
-                        child: buildSlider(),
-                      )
-                    ],
-                  ),
-                ),
+                right: 0,
+                child: buildController(),
               ),
               if (showControls)
                 Align(
@@ -114,32 +101,30 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
               if (showControls)
                 Align(
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomIconButton(
-                        onPressed: onReversePressed,
-                        iconData: Icons.rotate_left,
-                      ),
-                      CustomIconButton(
-                        onPressed: onPlayPressed,
-                        iconData: videoPlayerController!.value.isPlaying
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                      ),
-                      CustomIconButton(
-                        onPressed: onForwardPressed,
-                        iconData: Icons.rotate_right,
-                      ),
-                    ],
-                  ),
+                  child: buildPlayerButtons(),
                 )
             ],
           )),
     );
   }
 
-  Widget buildSlider() {
+  Padding buildController() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        children: [
+          renderTimeTextFromDuration(
+            videoPlayerController!.value.position,
+          ),
+          Expanded(
+            child: buildSlider(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Slider buildSlider() {
     return Slider(
       onChanged: (double val) {
         videoPlayerController!.seekTo(
@@ -149,6 +134,28 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       value: videoPlayerController!.value.position.inSeconds.toDouble(),
       min: 0,
       max: videoPlayerController!.value.duration.inSeconds.toDouble(),
+    );
+  }
+
+  Row buildPlayerButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        CustomIconButton(
+          onPressed: onReversePressed,
+          iconData: Icons.rotate_left,
+        ),
+        CustomIconButton(
+          onPressed: onPlayPressed,
+          iconData: videoPlayerController!.value.isPlaying
+              ? Icons.pause
+              : Icons.play_arrow,
+        ),
+        CustomIconButton(
+          onPressed: onForwardPressed,
+          iconData: Icons.rotate_right,
+        ),
+      ],
     );
   }
 
@@ -178,7 +185,8 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     final currentPosition = videoPlayerController!.value.position;
 
     Duration position = maxPosition;
-    bool canMoveSeekbar = (maxPosition - targetDuration).inSeconds > currentPosition.inSeconds;
+    bool canMoveSeekbar =
+        (maxPosition - targetDuration).inSeconds > currentPosition.inSeconds;
     if (canMoveSeekbar) {
       position = currentPosition + targetDuration;
     }
