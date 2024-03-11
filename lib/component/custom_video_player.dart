@@ -178,7 +178,8 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     final currentPosition = videoPlayerController!.value.position;
 
     Duration position = maxPosition;
-    if ((maxPosition - targetDuration).inSeconds > currentPosition.inSeconds) {
+    bool canMoveSeekbar = (maxPosition - targetDuration).inSeconds > currentPosition.inSeconds;
+    if (canMoveSeekbar) {
       position = currentPosition + targetDuration;
     }
 
