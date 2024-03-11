@@ -5,10 +5,7 @@ import 'package:video_player/video_player.dart';
 import 'dart:io';
 
 import 'package:video_player_kite/constant/colors.dart';
-
-import '../constant/strings.dart';
 import '../constant/values.dart';
-
 
 class CustomVideoPlayer extends StatefulWidget {
   final XFile video;
@@ -157,15 +154,14 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
   Widget renderTimeTextFromDuration(Duration duration) {
     return Text(
-      "${duration.inMinutes.toString().padLeft(2, Strings.ZERO)}:${(duration.inSeconds % 60).toString().padLeft(2, Strings.ZERO)}",
+      "${duration.inMinutes.toString().padLeft(2, Values.ZERO)}:${(duration.inSeconds % 60).toString().padLeft(2, Values.ZERO)}",
       style: const TextStyle(color: AppColors.color_ffffff),
     );
   }
 
   void onReversePressed() {
     const targetDuration = Duration(seconds: Values.MOVING_SECONDS_UNIT);
-    final currentPosition =
-        videoPlayerController!.value.position;
+    final currentPosition = videoPlayerController!.value.position;
 
     Duration position = const Duration();
 
