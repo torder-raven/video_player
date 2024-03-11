@@ -85,6 +85,8 @@ class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
   }
 
   void initVideoController() async {
+    currentPosition = const Duration();
+
     videoPlayerController =
         VideoPlayerController.file(File(widget.videoXFile.path))
           ..addListener(videoControllerListener);
