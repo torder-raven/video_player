@@ -165,7 +165,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
 
     Duration position = const Duration();
 
-    if (currentPosition.inSeconds > 3) {
+    if (currentPosition.inSeconds > Values.MOVING_SECONDS_UNIT) {
       position = currentPosition - targetDuration;
     }
 
