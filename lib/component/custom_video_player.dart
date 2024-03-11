@@ -194,6 +194,7 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   @override
   void dispose() {
     videoPlayerController?.removeListener(videoControllerListener);
+    videoPlayerController?.dispose();
     super.dispose();
   }
 }
