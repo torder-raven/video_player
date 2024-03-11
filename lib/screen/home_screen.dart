@@ -101,11 +101,11 @@ class _AppTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
-          HomeScreenStrings.TITLE_1,
+          HomeScreenStrings.TITLE_VIDEO,
           style: titleTextStyle,
         ),
         Text(
-          HomeScreenStrings.TITLE_2,
+          HomeScreenStrings.TITLE_PLAYER,
           style: titleTextStyle.copyWith(
             fontWeight: FontWeight.w700,
           ),
