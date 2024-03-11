@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player_ben/constant/colors.dart';
+import 'package:video_player_ben/constant/colors.dart' as home_colors;
 import 'package:video_player_ben/constant/constants.dart';
 import 'package:video_player_ben/constant/strings.dart';
 import 'package:video_player_ben/screen/widget/base_video_player.dart';
@@ -43,7 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(COLOR_BLUE), Color(COLOR_BLACK)],
+          colors: [
+            Color(home_colors.Colors.COLOR_BLUE),
+            Color(home_colors.Colors.COLOR_BLACK),
+          ],
         ),
       );
 
