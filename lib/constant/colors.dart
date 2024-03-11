@@ -1,5 +1,2 @@
-
-import 'dart:ui';
-
-const COLOR_BLUE = Color(0xFF2A3A7C);
-const COLOR_BLACK = Color(0xFF000118);
+const COLOR_BLUE = 0xFF2A3A7C;
+const COLOR_BLACK = 0xFF000118;
