@@ -74,6 +74,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
       );
   }
 
+  @override
+  void dispose() {
+    videoPlayerController?.dispose();
+    super.dispose();
+  }
+
   initializeController() async {
     currentPosition = Duration();
     videoPlayerController = VideoPlayerController.file(File(widget.video.path));
@@ -91,10 +97,12 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   void onReversedPressed() {
     final defaultTime = 3;
     final currentPosition = videoPlayerController!.value.position;
-    final canScrollToThreeSecondsBefort = currentPosition.inSeconds > defaultTime;
+    final canScrollToThreeSecondsBefort =
+        currentPosition.inSeconds > defaultTime;
     Duration position = Duration();
 
-    if (canScrollToThreeSecondsBefort) position = currentPosition - Duration(seconds: defaultTime);
+    if (canScrollToThreeSecondsBefort)
+      position = currentPosition - Duration(seconds: defaultTime);
 
     videoPlayerController!.seekTo(position);
   }
@@ -103,10 +111,13 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
     final defaultTime = 3;
     final maxPosition = videoPlayerController!.value.duration;
     final currentPosition = videoPlayerController!.value!.position;
-    final canScrollToThreeSecondsLater = (maxPosition - Duration(seconds: defaultTime)).inSeconds > currentPosition.inSeconds;
+    final canScrollToThreeSecondsLater =
+        (maxPosition - Duration(seconds: defaultTime)).inSeconds >
+            currentPosition.inSeconds;
     Duration position = maxPosition;
 
-    if (canScrollToThreeSecondsLater) position = currentPosition + Duration(seconds: defaultTime);
+    if (canScrollToThreeSecondsLater)
+      position = currentPosition + Duration(seconds: defaultTime);
 
     videoPlayerController!.seekTo(position);
   }
