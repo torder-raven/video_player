@@ -1,4 +1,4 @@
-package com.example.video_player
+package com.kite.vid_player
 
 import io.flutter.embedding.android.FlutterActivity
 
