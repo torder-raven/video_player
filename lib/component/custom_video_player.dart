@@ -81,16 +81,19 @@ class _CustomVideoPlayerState extends State<CustomVideoPlayer> {
   }
 
   initializeController() async {
-    currentPosition = Duration();
     videoPlayerController = VideoPlayerController.file(File(widget.video.path));
     await videoPlayerController!.initialize();
 
     videoPlayerController!.addListener(() {
-      final currentPosition = videoPlayerController!.value.position;
+      onPositonMoved();
+    });
+  }
 
-      setState(() {
-        this.currentPosition = currentPosition;
-      });
+  onPositonMoved() {
+    final currentPosition = videoPlayerController!.value.position;
+
+    setState(() {
+      this.currentPosition = currentPosition;
     });
   }
 
