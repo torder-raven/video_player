@@ -1,9 +1,4 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'custom_video_player.dart';
 import 'icon.dart';
 
 class CustomController extends StatelessWidget {
