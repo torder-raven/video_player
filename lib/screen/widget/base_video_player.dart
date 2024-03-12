@@ -102,8 +102,7 @@ class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
 
       if (showControls &&
           currentPosition - eventPosition >
-              const Duration(
-                  seconds: BaseVideoPlayerConstants.HIDE_SECONDS)) {
+              const Duration(seconds: BaseVideoPlayerConstants.HIDE_SECONDS)) {
         showControls = false;
       }
     });
@@ -153,14 +152,17 @@ class _BaseVideoPlayerState extends State<BaseVideoPlayer> {
   }
 
   void onSeek(double seconds) {
-    videoPlayerController.seekTo(Duration(seconds: seconds.toInt()));
+    videoPlayerController.seekTo(
+      Duration(
+        seconds: seconds.toInt(),
+      ),
+    );
     updateEventDuration();
   }
 
   void updateEventDuration() {
     eventPosition = videoPlayerController.value.position;
   }
-
 }
 
 class _VideoControls extends StatelessWidget {
