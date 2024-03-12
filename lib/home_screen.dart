@@ -51,7 +51,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  //video 받아서 진행해야하므로 async
   void selectVideo() async {
     final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
     setState(() {

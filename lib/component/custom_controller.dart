@@ -7,12 +7,13 @@ class CustomController extends StatelessWidget {
   final VoidCallback onForwardPressed;
   final bool isPlaying;
 
-  const CustomController(
-      {super.key,
-        required this.onPlayPressed,
-        required this.onReversedPressed,
-        required this.onForwardPressed,
-        required this.isPlaying});
+  const CustomController({
+    super.key,
+    required this.onPlayPressed,
+    required this.onReversedPressed,
+    required this.onForwardPressed,
+    required this.isPlaying,
+  });
 
   @override
   Widget build(BuildContext context) {
